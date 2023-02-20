@@ -1,7 +1,7 @@
 import axios from "axios";
 export const postCalculation = async (expression)=> {
     return await axios
-        .post("http://localhost:8080/calculate", {
+        .post("http://localhost:8080/CalcControl", {
             expression
         })
         .then((response) => {

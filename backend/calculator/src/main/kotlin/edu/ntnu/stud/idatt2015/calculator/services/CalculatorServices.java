@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class CalculatorServices {
 
 
-
-
-
+    public String calculateEq(String request) {
+        return request;
+    }
 }
