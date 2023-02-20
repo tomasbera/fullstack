@@ -1,0 +1,11 @@
+{
+  "feedback": {
+    "name": "qwe",
+    "email": "tomas@herasolutions.no",
+    "message": "halla balla de",
+    "status": "true"
+  },
+  "login": {
+    "status": "true"
+  }
+}
