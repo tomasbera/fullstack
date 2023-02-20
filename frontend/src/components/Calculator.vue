@@ -26,6 +26,9 @@
 </template>
 
 <script>
+import {string} from "yup";
+import {postCalculation} from "@/services/Calculator";
+
 export default {
   data() {
     return {
@@ -101,13 +104,10 @@ export default {
       this.operator = (a, b) => a + b;
       this.setPrev("+");
     },
-    answer() {
-      if (isFinite(parseFloat(this.prev_eq)/parseFloat(this.curr_eq))){
+    async answer() {
+      if (isFinite(parseFloat(this.prev_eq) / parseFloat(this.curr_eq))) {
         this.equation = `${this.prev_eq} ${this.prevOp} ${this.curr_eq}`
-        this.curr_eq = `${this.operator(
-            parseFloat(this.prev_eq),
-            parseFloat(this.curr_eq)
-        )}`;
+        this.curr_eq = await this.evaluateEq(this.equation);
         this.equation = `${this.equation} = ${this.curr_eq}`;
         this.onSubmit();
         this.prev_eq = null;
@@ -124,6 +124,9 @@ export default {
       this.$store.dispatch(`clearLog`);
     },
 
+    async evaluateEq(expression) {
+      return postCalculation(expression);
+    }
   },
 }
 

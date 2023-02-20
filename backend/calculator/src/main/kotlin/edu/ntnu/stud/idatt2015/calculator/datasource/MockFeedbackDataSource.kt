@@ -3,10 +3,11 @@ package edu.ntnu.stud.idatt2015.calculator.datasource
 import edu.ntnu.stud.idatt2015.calculator.model.Feedback
 import org.springframework.stereotype.Repository
 
-@Repository
-class MockFeedbackDataSource : Feedback() {
+interface MockFeedbackDataSource {
 
-    override fun getStatus(): Boolean {
-        return super.getStatus()
-    }
+    fun createFeedback(feedback: Feedback): Feedback
+
+    fun deleteFeedback(username: String)
+
+    fun getStatus(status: Boolean)
 }

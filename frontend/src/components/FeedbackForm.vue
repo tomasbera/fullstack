@@ -54,6 +54,7 @@ import {useField, useForm } from "vee-validate";
 import store from "@/stores/store";
 import axios from "axios";
 import {ref} from "vue";
+import {postFeedback} from "@/services/Feedback";
 
 export default {
   name: "FeedbackForm",
@@ -75,35 +76,21 @@ export default {
     const { handleSubmit, errors } = useForm({ validationSchema });
     const { value: email, handleChange } = useField('email');
     const { value: username } = useField('username');
-    const { value: message, handleBlur } = useField('message');
+    const { value: message, setValue: setMessage } = useField('message');
 
 
 
     const submit = handleSubmit(async values => {
-      try {
-        const response = await axios.post('http://localhost:3000/feedback', {
-          name: values.username,
-          email: values.email,
-          message: values.message,
-          status: 'true'
-        });
-
-        if (response.data.email === email.value) {
-          submitMessage.value = 'Thanks for your feedback';
-        } else {
-          throw new Error('Something went wrong. Please try again later.');
-        }
-
-        setTimeout(() => {
-          submitMessage.value = '';
-          }, 3000);
-
-        await store.dispatch('savedRecentInfo', values);
-        console.log('submit', values);
-
-      } catch (error) {
-        submitMessage.value = error.message;
+     if (await postFeedback()){
+       setMessage("");
+       await store.dispatch("savedRecentInfo", values);
+       submitMessage.value = "Thanks For Your Feedback";
+     }else {
+        submitMessage.value = "Something went wrong. Please try again later.";
       }
+     setTimeout(() => {
+        submitMessage.value = "";
+      }, 3000);
     });
 
     return {
