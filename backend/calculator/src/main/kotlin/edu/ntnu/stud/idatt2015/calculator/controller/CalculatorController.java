@@ -20,11 +20,9 @@ public class CalculatorController {
     }
 
     @PostMapping(value = "/solve")
-    public String solve(@RequestBody Expression expression){
-        System.out.println(expression);
-        services.solve(expression);
-        LOGGER.info("Equation: n1: " + expression.getNumb1() +", n2: " +  expression.getNumb2()
-                + ", operator: " + expression.getOperator());
+    public String solve(@RequestBody Expression exp){
+        services.solve(exp);
+        LOGGER.info("Equation: " + exp.getNumb1() +" "+ exp.getOperator() +" "+ exp.getNumb2());
         LOGGER.info("Answer: " + services.getAnswer());
 
         return services.toString();
