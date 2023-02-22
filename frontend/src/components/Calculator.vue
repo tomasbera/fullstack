@@ -107,11 +107,11 @@ export default {
     async answer() {
       if (isFinite(parseFloat(this.prev_eq) / parseFloat(this.curr_eq))) {
         this.equation = await calculator.postCalculation({
-          n1: this.prev_eq,
-          n2: this.curr_eq,
+          numb1: parseFloat(this.prev_eq),
+          numb2: parseFloat(this.curr_eq),
           operator: this.prevOp
         });
-        this.curr_eq = calculator.getAnswer().toString();
+        this.curr_eq = await calculator.getAnswer();
         this.equation = `${this.equation} = ${this.curr_eq}`;
         this.onSubmit();
         this.prev_eq = null;
