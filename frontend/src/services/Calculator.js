@@ -1,23 +1,24 @@
 import axios from "axios";
-export const postCalculation = async (expression)=> {
-    return await axios
-        .post("http://localhost:8080/CalcControl", {
-            expression
+export function postCalculation(equation) {
+    console.log("hallo")
+    return axios.post("http://localhost:8080/calculate/solve", equation)
+        .then((response) => {
+            console.log("hei")
+            console.log(response.data)
+            return response.data;
         })
+}
+
+export function getAnswer() {
+    return axios.post("http://localhost:8080/calculate/ans")
         .then((response) => {
             return response.data;
         })
-        .catch((error) => {
-            if (error.response) {
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log('Error', error.message);
-            }
-            return error.data
+}
 
-        });
-};
+export function getLog() {
+    return axios.post("http://localhost:8080/calculate/log")
+        .then((response) => {
+            return response.data;
+        })
+}

@@ -1,34 +1,45 @@
 package edu.ntnu.stud.idatt2015.calculator.controller;
-
-import edu.ntnu.stud.idatt2015.calculator.model.Equation;
+import edu.ntnu.stud.idatt2015.calculator.model.Expression;
 import edu.ntnu.stud.idatt2015.calculator.services.CalculatorServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.beans.Expression;
+
+import java.util.ArrayList;
 
 @RestController
-@CrossOrigin
-
+@CrossOrigin("*")
+@RequestMapping("/calculate")
 public class CalculatorController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CalculatorController.class);
 
-    @PostMapping("/CalcControl")
-    @ResponseBody
-    public ResponseEntity<String> calculate(@RequestBody Equation body) {
-        String request = body.getEqu();
-        String result;
-        LOGGER.info("Received" + request);
-        if (request == null) return ResponseEntity.noContent().build();
-        try {
-            result = new CalculatorServices().calculateEq(request);
-            System.out.println(result);
-        }catch (Exception e){
-            LOGGER.error("Error with expression format: " + e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
+    private final CalculatorServices services = new CalculatorServices();
+    Logger LOGGER = LoggerFactory.getLogger(CalculatorController.class);
+
+
+    @GetMapping("/ans")
+    public double answer(){
+        LOGGER.info("Retrieved answer: " + services.getAnswer());
+        return services.getAnswer();
+    }
+
+    @PostMapping("/solve")
+    public double solve(@RequestBody Expression expression){
+        services.solve(expression);
+        LOGGER.info("Equation: n1: " + expression.getN1() +", n2: " +  expression.getN2()
+                + ", operator: " + expression.getOperator());
+        LOGGER.info("Answer: " + services.getAnswer());
+
+        if (services.addToLog(services.toString())){
+            LOGGER.info("Added to : " + services.toString());
         }
-        return null;
+        return services.getAnswer();
+    }
+
+    @GetMapping("/log")
+    public ArrayList<String> log() {
+        LOGGER.info("Return log: " + services.toString());
+        return services.getLog();
     }
 }
+
