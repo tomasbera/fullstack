@@ -13,7 +13,7 @@ public class CalculatorController {
     Logger LOGGER = LoggerFactory.getLogger(CalculatorController.class);
 
 
-    @PostMapping(value = "/ans")
+    @GetMapping(value = "/ans")
     public String answer(){
         LOGGER.info("Retrieved answer: " + services.getAnswer());
         return services.getAnswer();

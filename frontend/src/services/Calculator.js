@@ -9,7 +9,7 @@ export function postCalculation(equation) {
 }
 
 export function getAnswer() {
-    return axios.post("http://localhost:8080/calculate/ans")
+    return axios.get("http://localhost:8080/calculate/ans")
         .then((response) => {
             return response.data;
         })
