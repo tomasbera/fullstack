@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import {string} from "yup";
 import * as calculator from "@/services/Calculator"
 
 export default {

@@ -9,19 +9,19 @@ public class CalculatorServices {
     private double answer;
     private Expression equation;
 
-    public void solve(Expression equation){
-        this.equation = equation;
-        if(equation.getOperator() == '+'){
-            answer = equation.getNumb1() + equation.getNumb2();
+    public void solve(Expression exp){
+        this.equation = exp;
+        if(exp.getOperator() == '+'){
+            answer = exp.getNumb1() + exp.getNumb2();
             return;
-        }else if(equation.getOperator() == '-'){
-            answer = equation.getNumb1() - equation.getNumb2();
+        }else if(exp.getOperator() == '-'){
+            answer = exp.getNumb1() - exp.getNumb2();
             return;
-        }else if(equation.getOperator() == '*'){
-            answer = equation.getNumb1() * equation.getNumb2();
+        }else if(exp.getOperator() == '*'){
+            answer = exp.getNumb1() * exp.getNumb2();
             return;
-        }else if(equation.getOperator() == '/'){
-            answer = equation.getNumb1() / equation.getNumb2();
+        }else if(exp.getOperator() == '/'){
+            answer = exp.getNumb1() / exp.getNumb2();
             return;
         }
         answer = 0;
