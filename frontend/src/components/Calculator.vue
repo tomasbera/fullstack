@@ -103,6 +103,7 @@ export default {
       this.operator = (a, b) => a + b;
       this.setPrev("+");
     },
+
     async answer() {
       if (isFinite(parseFloat(this.prev_eq) / parseFloat(this.curr_eq))) {
         this.equation = await calculator.postCalculation({

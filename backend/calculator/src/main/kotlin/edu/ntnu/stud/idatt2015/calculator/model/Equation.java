@@ -33,4 +33,5 @@ public class Equation {
     public String toString() {
         return numb1 + " " + operator + " " + numb2;
     }
+
 }

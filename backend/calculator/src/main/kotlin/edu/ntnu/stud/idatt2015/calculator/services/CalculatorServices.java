@@ -11,23 +11,19 @@ public class CalculatorServices {
 
     public void solve(Equation exp){
         this.equation = exp;
-        if(exp.getOperator() == '+'){
-            answer = exp.getNumb1() + exp.getNumb2();
-            return;
-        }else if(exp.getOperator() == '-'){
-            answer = exp.getNumb1() - exp.getNumb2();
-            return;
-        }else if(exp.getOperator() == '*'){
-            answer = exp.getNumb1() * exp.getNumb2();
-            return;
-        }else if(exp.getOperator() == '/'){
-            answer = exp.getNumb1() / exp.getNumb2();
-            return;
-        }
-        answer = 0;
+        double numb1 = exp.getNumb1();
+        double numb2 = exp.getNumb2();
+        char op = exp.getOperator();
+        this.answer = switch (op) {
+            case '+' -> numb1 + numb2;
+            case '-' -> numb1 - numb2;
+            case '*' -> numb1 * numb2;
+            case '/' -> numb1 / numb2;
+            default -> 0;
+        };
     }
 
-    public double getAnswer() {
+    public Double getAnswer() {
         return answer;
     }
 
