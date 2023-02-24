@@ -101,7 +101,6 @@ export default {
       submit,
       validationSchema,
       handleChange,
-      handleBlur,
       submitMessage
     }
   },

@@ -1,6 +1,6 @@
 package edu.ntnu.stud.idatt2015.calculator.model;
 
-public class Expression {
+public class Equation {
     private double numb1;
     private double numb2;
     private char operator;
@@ -9,7 +9,7 @@ public class Expression {
         return numb1;
     }
 
-    public void setNumb1(int numb1) {
+    public void setNumb1(double numb1) {
         this.numb1 = numb1;
     }
 
@@ -17,7 +17,7 @@ public class Expression {
         return numb2;
     }
 
-    public void setNumb2(int numb2) {
+    public void setNumb2(double numb2) {
         this.numb2 = numb2;
     }
 
