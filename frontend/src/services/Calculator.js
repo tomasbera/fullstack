@@ -14,3 +14,10 @@ export function getAnswer() {
             return response.data;
         })
 }
+
+export function getLog() {
+    return axios.get("http://localhost:8080/calculations/log")
+        .then((response) => {
+            return response.data;
+        })
+}

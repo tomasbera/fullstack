@@ -3,7 +3,9 @@
 <template>
   <h3>Log</h3>
   <ul id="scroll_log">
-    <li v-for="item in this.$store.state.log" :key="item">{{item}}</li>
+    <li v-for="item in this.$store.state.log" :key="item" >
+      {{ item }}
+    </li>
   </ul>
 </template>
 

@@ -9,8 +9,8 @@ export default createStore({
     }
   },
   mutations: {
-    ADD_TO_LOG(state, equation){
-      state.log.push(equation);
+    ADD_TO_LOG(state, newLog){
+      state.log = newLog;
     },
 
     CLEAR_LOG(state){

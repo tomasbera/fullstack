@@ -106,22 +106,21 @@ export default {
 
     async answer() {
       if (isFinite(parseFloat(this.prev_eq) / parseFloat(this.curr_eq))) {
-        this.equation = await calculator.postCalculation({
+        await calculator.postCalculation({
           numb1: parseFloat(this.prev_eq),
           numb2: parseFloat(this.curr_eq),
           operator: this.prevOp
         });
         this.curr_eq = await calculator.getAnswer();
-        this.equation = `${this.equation} = ${this.curr_eq}`;
-        this.onSubmit();
+        await this.onSubmit();
         this.prev_eq = null;
       } else {
         this.onError("Division By Zero is Bad")
       }
     },
 
-    onSubmit() {
-      this.$store.dispatch(`addToLog`, this.equation);
+    async onSubmit() {
+      this.$store.dispatch(`addToLog`, await calculator.getLog());
     },
 
     onClear() {
