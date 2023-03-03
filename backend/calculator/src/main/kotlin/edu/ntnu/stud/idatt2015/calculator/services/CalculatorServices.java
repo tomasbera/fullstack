@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import edu.ntnu.stud.idatt2015.calculator.model.Equation;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 @Service
 public class CalculatorServices {

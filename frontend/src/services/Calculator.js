@@ -1,5 +1,4 @@
 import axios from "axios";
-import log from "@/components/Log.vue";
 export function postCalculation(equation) {
     return axios.post("http://localhost:8080/calculations/calc", equation)
         .then((response) => {
