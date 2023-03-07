@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@CrossOrigin(value = "*")
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/calculations")
 public class CalculatorController {
 

@@ -39,11 +39,7 @@ export default {
   components: {BasicInput},
   methods: {
     handleLoginClick() {
-      axios.get("http://localhost:3000/login").then(response => {
-        if(response.data.status === "true"){
-          router.push("/calc");
-        }
-      })
+
     },
   },
   data() {
