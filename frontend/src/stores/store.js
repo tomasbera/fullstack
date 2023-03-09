@@ -6,6 +6,10 @@ export default createStore({
     feedback: {
       recentEmail: '',
       recentName: '',
+    },
+    credentials: {
+      username: '',
+      token: ''
     }
   },
   mutations: {
@@ -21,6 +25,12 @@ export default createStore({
       state.feedback.recentName = info.name;
       state.feedback.recentEmail = info.email;
     },
+
+    SET_CREDENTIALS(state, credentials){
+      console.log(credentials.token + " " + credentials.username)
+      state.credentials.username = credentials.username;
+      state.credentials.token = credentials.token;
+    }
   },
   actions: {
     addToLog( {commit}, solution) {
@@ -34,6 +44,10 @@ export default createStore({
     savedRecentInfo( { commit }, info) {
       commit("SET_RECENT_INFO", info)
     },
+
+    setCredentials( {commit}, credentials){
+      return commit(`SET_CREDENTIALS`, credentials)
+    }
   },
   modules: {}
 })

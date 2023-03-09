@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import NavbarComponent from "@/components/navbarComponent.vue";
 </script>
 
 <template>
@@ -7,16 +8,11 @@ import { RouterLink, RouterView } from 'vue-router'
     <img alt="Vue logo" class="logo" src="@/assets/Logo.png" width="140" height="205" />
 
     <div class="wrapper">
-      <nav>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/feedback">Feedback</RouterLink>
-        <RouterLink to="/calc">Calc</RouterLink>
-        <RouterLink to="/">Login</RouterLink>
-      </nav>
+      <navbarComponent/>
     </div>
   </header>
 
-  <RouterView />
+
 </template>
 
 <style scoped>

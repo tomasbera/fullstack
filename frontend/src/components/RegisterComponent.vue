@@ -78,7 +78,7 @@ export default {
       const token = await registerUser(username.value, password.value)
       console.log(username.value + " " + password.value);
       if (token !== undefined) {
-        await store.dispatch("SAVE_CREDENTIALS", values);
+        await store.dispatch("setCredentials", values);
         submitMessage.value = "Registration Successful";
         setTimeout(() => {
           submitMessage.value = "";
@@ -98,7 +98,6 @@ export default {
         storage.setStorageSync('token', token.token);
         storage.setStorageSync('username', username.value);
         store.commit('setToken', token.token);
-        store.commit('setUsername', username.value);
         router.push("/calc");
       } else {
         submitMessage.value = "Something went wrong. Please try again later.";
