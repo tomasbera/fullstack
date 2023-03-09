@@ -13,7 +13,6 @@
         <div class="box j" @click="add('4')">4</div>
         <div class="box k" @click="add('5')">5</div>
         <div class="box l" @click="add('6')">6</div>
-        <RouterLink to="/sda"></RouterLink>
         <div class="box m operation" @click="multiplication()">*</div>
         <div class="box o" @click="add('7')">7</div>
         <div class="box p" @click="add('8')">8</div>

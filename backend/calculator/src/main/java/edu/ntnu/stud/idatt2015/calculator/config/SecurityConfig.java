@@ -1,7 +1,5 @@
 package edu.ntnu.stud.idatt2015.calculator.config;
 
-import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -13,6 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -49,11 +48,10 @@ public class SecurityConfig {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(@NotNull CorsRegistry registry) {
+            public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
                         .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
             }
         };
     }
 }
-

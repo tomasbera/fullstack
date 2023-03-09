@@ -10,7 +10,7 @@ import lombok.Getter;
 @Table(name = "equation")
 public class Equation {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "equation_id", unique = true, nullable = false)
     private int id;
     @Column(name = "numb1", nullable = false)
@@ -20,6 +20,6 @@ public class Equation {
     private double numb2;
     @Column(name = "operator", nullable = false)
     private char operator;
-    @Column(name = "answer", nullable = true)
+    @Column(name = "answer")
     private double answer;
 }

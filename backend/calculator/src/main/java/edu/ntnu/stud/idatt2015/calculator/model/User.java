@@ -3,21 +3,30 @@ package edu.ntnu.stud.idatt2015.calculator.model;
 import java.util.Collection;
 import java.util.List;
 
-import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
 
 import lombok.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 @Data
+@AllArgsConstructor
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -31,26 +40,44 @@ public class User implements UserDetails {
     @NonNull
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="username", referencedColumnName = "username")
     private List<Equation> equations;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    @NonNull
+    private Role role;
+
+    /**
+     * Method addEquation.
+     * Adds a equation to the list of equations.
+     * @param equation The equation to add.
+     * @throws NullPointerException if the equation is null.
+     */
+    public void addEquation(@NonNull Equation equation) throws NullPointerException {
+        equations.add(equation);
+    }
+
+    /**
+     * Method removeEquation.
+     * Removes a equation from the list of equations.
+     * @param equation The equation to remove.
+     * @throws NullPointerException if the equation is null.
+     */
+    public void removeEquation(@NonNull Equation equation) throws NullPointerException {
+        equations.remove(equation);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+    @NotNull
     @Override
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override

@@ -5,10 +5,7 @@
       password: h97.OqxwW
       driverClassName: com.mysql.cj.jdbc.Driver
     jpa:
-      hibernate:
-        ddl-auto: create-drop
-      show-sql: true
+      hibernate.ddl-auto: update
       properties:
         hibernate:
           format_sql: true
-      database: mysql

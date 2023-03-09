@@ -52,7 +52,6 @@ import BasicInput from "@/components/BasicInput.vue";
 import * as yup from 'yup'
 import {useField, useForm } from "vee-validate";
 import store from "@/stores/store";
-import axios from "axios";
 import {ref} from "vue";
 import {postFeedback} from "@/services/Feedback";
 

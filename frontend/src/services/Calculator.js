@@ -20,16 +20,3 @@ export function getLog() {
             return response.data;
         })
 }
-
-export const registerUser = async (name, password) => {
-    return await axios.post("http://localhost:8080/api/login", {
-        username: name,
-        password: password,
-    }).then((response) => {
-        return response.data;
-    }).catch(
-        (error) => {
-            console.warn(error);
-        }
-    );
-}

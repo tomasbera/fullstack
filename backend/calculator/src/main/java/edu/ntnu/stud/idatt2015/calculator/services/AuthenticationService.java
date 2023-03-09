@@ -1,26 +1,30 @@
 package edu.ntnu.stud.idatt2015.calculator.services;
-
 import edu.ntnu.stud.idatt2015.calculator.controller.AuthenticationRequest;
 import edu.ntnu.stud.idatt2015.calculator.controller.AuthenticationResponse;
 import edu.ntnu.stud.idatt2015.calculator.controller.RegisterRequest;
 import edu.ntnu.stud.idatt2015.calculator.model.Role;
 import edu.ntnu.stud.idatt2015.calculator.model.User;
 import edu.ntnu.stud.idatt2015.calculator.repository.UserRepo;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
+import lombok.RequiredArgsConstructor;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserRepo repo;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
 
+    private final UserRepo userRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final JwtService jwtService;
+
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
         User user = User
@@ -29,10 +33,13 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        repo.save(user);
-        String jwtToken = jwtService.generateToken(user);
+        if (userRepository.findByUsername(request.getUsername()).isPresent())
+            throw new IllegalStateException("Username already exists");
+        userRepository.save(user);
 
-        return AuthenticationResponse.builder()
+        String jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse
+                .builder()
                 .token(jwtToken)
                 .build();
     }
@@ -44,7 +51,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        User user = repo.findByUsername(request.getUsername())
+        User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("UgaBoga username not found"));
 
         String jwtToken = jwtService.generateToken(user);
