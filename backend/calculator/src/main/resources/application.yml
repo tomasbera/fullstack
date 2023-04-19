@@ -2,7 +2,7 @@
     datasource:
       url: jdbc:mysql://mysql.stud.idi.ntnu.no:3306/tomaber
       username: tomaber
-      password: h97.OqxwW
+      password: *********
       driverClassName: com.mysql.cj.jdbc.Driver
     jpa:
       hibernate.ddl-auto: update
